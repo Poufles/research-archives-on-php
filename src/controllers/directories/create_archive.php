@@ -42,8 +42,11 @@ if (isset($_POST["submit"])) {
     if ($isFieldsComplete) {
         $newArchiveInfo["username"] = $_SESSION["username"];
 
-        include "upload_archive.php";
-        UploadArchive($newArchiveInfo);
+        include __DIR__ . "/upload_archive.php";
+        SaveByCategory($newArchiveInfo);
+        SaveByAuthors($newArchiveInfo);
+        SaveByTitle($newArchiveInfo);
+        SaveToUser($newArchiveInfo);
     };
 };
 ?>

@@ -1,4 +1,4 @@
-<?php include "../../controllers/auth/create_user.php";?>
+<?php include __DIR__ . "/../../controllers/auth/create_user.php";?>
 
 <!DOCTYPE html>
 <html lang="en">

@@ -1,3 +1,5 @@
+<?php include __DIR__ . "/../../controllers/directories/read_archives.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +17,16 @@
     <br>
     <br>
     <a href="./research_register.php">go to create archive</a>
+    <br>
+    <br>
+    <hr>
+    <p>Read Business and Marketing</p>
+    <?php
+    print_r($archives);
+    // foreach ($archives as $archive) {
+    //     echo "<a href='download.php?file=$archive'>$archive</a><br>";
+    // }
+    ?>
 </body>
 
 </html>

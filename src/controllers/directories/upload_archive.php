@@ -1,46 +1,99 @@
 <?php
 
+include __DIR__ . "/../utils/CategoryToDirectory.php";
+
 /**
  * @param object $archive
  */
-function UploadArchive($archive)
+function SaveByCategory($archive)
 {
-    $username = $archive["username"];
-    $tmpFile = $archive["file"]["tmp_name"];
-    $fileName = $archive["file"]["name"];
 
-    $userDestination =
-        "../../../database/user_data/$username/uploads/$fileName";
+    $jsonFile =
+        "../../../database/directories/" . CategoryToDirectory($archive["category"]) . "/archives.json";
 
-    $archiveDestination =
-        "../../../database/directories/" .
-        CategoryToDirectory($archive["category"]) .
-        "/$fileName";
+    if (!is_file($jsonFile)) file_put_contents($jsonFile, json_encode([], JSON_PRETTY_PRINT));
 
-    if (move_uploaded_file($tmpFile, $userDestination)) {
 
-        copy($userDestination, $archiveDestination);
-    };
+    $data = json_decode(file_get_contents($jsonFile), true);
+
+    $data[$archive["title"]] = $archive;
+
+    file_put_contents(
+        $jsonFile,
+        json_encode($data, JSON_PRETTY_PRINT)
+    );
 };
 
 /**
- * @param string $category
+ * @param object $archive
  */
-function CategoryToDirectory($category)
+function SaveByAuthors($archive)
 {
-    $directories = [
-        "businessAndMarketing" => "business_and_marketing",
-        "computerStudies" => "computer_studies",
-        "economics" => "economics",
-        "englishAndLiterature" => "english_and_literature",
-        "history" => "history",
-        "mathematicsAndPhysics" => "mathematics_and_physics",
-        "medicine" => "medicine",
-        "psychologyAndPsiology" => "psychology_and_psiology",
-        "generalScience" => "general_science",
-        "socialScience" => "social_science",
-        "others" => "others",
-    ];
 
-    return $directories[$category];
-}
+    $jsonFile =
+        "../../../database/authors/authors.json";
+
+    $data = json_decode(file_get_contents($jsonFile), true);
+
+    $author = $archive["author"];
+
+    if (!empty($data[$author])) {
+        array_push(
+            $data[$author],
+            [
+                "title" => $archive["title"],
+                "category" => $archive["category"]
+            ]
+        );
+    } else {
+        $data[$author] = [[
+            "title" => $archive["title"],
+            "category" => $archive["category"]
+        ]];
+    };
+
+    file_put_contents(
+        $jsonFile,
+        json_encode($data, JSON_PRETTY_PRINT)
+    );
+};
+
+/**
+ * @param object $archive
+ */
+function SaveByTitle($archive)
+{
+
+    $jsonFile =
+        "../../../database/titles/titles.json";
+
+    $data = json_decode(file_get_contents($jsonFile), true);
+
+    $data[$archive["title"]] = $archive["category"];
+
+    file_put_contents(
+        $jsonFile,
+        json_encode($data, JSON_PRETTY_PRINT)
+    );
+};
+
+/**
+ * @param object $archive
+ */
+function SaveToUser($archive) {
+    
+    $jsonFile =
+        "../../../database/user_data/" . $archive['username'] . "/uploads.json";
+
+    $data = json_decode(file_get_contents($jsonFile), true);
+
+    array_push($data, [
+        "title" => $archive["title"],
+        "category" => $archive["category"]
+    ]);
+
+    file_put_contents(
+        $jsonFile,
+        json_encode($data, JSON_PRETTY_PRINT)
+    );
+};

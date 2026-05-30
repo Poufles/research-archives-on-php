@@ -65,11 +65,15 @@ if (isset($_POST["submit"])) {
         $newUserDir = $baseDir . $userCredentials["username"];
 
         mkdir($newUserDir);
-        mkdir($newUserDir . "/uploads");
 
         // AI was used here
         file_put_contents($newUserDir . "/profile.json", json_encode($userCredentials));
         // AI was used here
+
+        file_put_contents(
+            "$newUserDir/uploads.json",
+            json_encode([], JSON_PRETTY_PRINT)
+        );
 
         $_SESSION["username"] = $userCredentials["username"];
 
