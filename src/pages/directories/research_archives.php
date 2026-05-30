@@ -8,10 +8,13 @@
 </head>
 
 <body>
-    <?php
-    session_start();
-    echo $_SESSION["username"];
-    ?>
+    <a href="../auth/login.php">go to login</a>
+    <br>
+    <br>
+    <a href="../auth/register.php">go to register</a>
+    <br>
+    <br>
+    <a href="./research_register.php">go to create archive</a>
 </body>
 
 </html>
