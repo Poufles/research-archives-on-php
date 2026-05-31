@@ -8,7 +8,6 @@ $userCredentials = [
     "password" => null,
     "email" => null,
     "gender" => null,
-    "telephone" => null,
     "status" => null
 ];
 
@@ -18,7 +17,6 @@ $fieldStatus = [
     "password" => "unset",
     "email" => "unset",
     "gender" => "unset",
-    "telephone" => "unset",
     "status" => "unset"
 ];
 
@@ -40,7 +38,6 @@ if (isset($_POST["submit"])) {
         "password" => empty($_POST["password"]),
         "email" => empty($_POST["email"]),
         "gender" => empty($_POST["gender"]),
-        "telephone" => empty($_POST["telephone"]),
         "status" => empty($_POST["status"]),
     ];
 
