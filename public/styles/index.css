@@ -1,0 +1,195 @@
+@import "./css-reset-jc.css";
+@import url('https://fonts.cdnfonts.com/css/rogan');
+
+:root {
+    --primary-color: #46602C;
+    --secondary-color: #000;
+    --accent-color: #FFF;
+    --other-color: #FFF7AD;
+
+    font-family: 'Rogan', sans-serif;
+
+}
+
+body {
+    background-image: linear-gradient(#FFF 13%, #FFF7AD 100%);
+    height: 100dvh;
+    position: relative;
+}
+
+nav {
+    width: 100dvw;
+    padding: 30px 75px;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    position: absolute;
+}
+
+nav a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+nav #nav-logo,
+nav #nav-actions {
+    flex-shrink: 0;
+}
+
+nav #nav-logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+nav #nav-logo a {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+nav #nav-searchbar {
+    flex: 1 1 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav #nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+nav #nav-actions .browse-dropdown {
+    position: relative;
+}
+
+nav #nav-actions .browse-dropdown .dropdown-head {
+    color: var(--primary-color);
+    cursor: pointer;
+    display: flex;
+    gap: 7px;
+
+    &>svg {
+        width: 18px;
+    }
+}
+
+nav #nav-actions .browse-dropdown .dropdown-body {
+    background-color: none;
+    border-right: 2px solid var(--primary-color);
+    border-radius: 2px;
+    padding: 10px 15px 10px 20px;
+    width: max-content;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    position: absolute;
+    top: 100%;
+    right: 8px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: 0.3s;
+    opacity: 1;
+    visibility: visible;
+
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+nav #nav-actions .browse-dropdown .dropdown-body.disabled {
+    /* display: none; */
+    height: 0px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+nav #nav-actions .browse-dropdown .dropdown-body .dropdown-options {
+    border-bottom: 2px solid transparent;
+    width: max-content;
+    text-align: right;
+    transition: 0.3s;
+
+    &:hover {
+        border-bottom: 2px solid var(--primary-color);
+    }
+}
+
+nav #nav-actions .browse-dropdown .dropdown-body .dropdown-options:not(:last-of-type) {
+    margin-bottom: 10px;
+}
+
+nav #nav-actions .browse-dropdown .dropdown-body .dropdown-options a {
+    color: var(--primary-color);
+}
+
+nav #nav-actions #register {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    color: var(--accent-color);
+    padding: 7px 30px;
+}
+
+main {
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.starting-block {
+    width: 100%;
+    max-width: 700px;
+    padding-bottom: 70px;
+}
+
+.starting-block .text {
+    color: var(--primary-color);
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.starting-block .component.searchbar {
+    border: 4px solid var(--primary-color);
+    border-radius: 50px;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.starting-block .component.searchbar #search-form {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+}
+
+.starting-block .component.searchbar #search-form input {
+    flex-grow: 1 1 auto;
+
+    background-color: transparent;
+    border: none;
+    color: var(--primary-color);
+    width: 100%;
+    outline: transparent;
+
+    &::placeholder {
+        color: var(--primary-color);
+    }
+}
+
+.starting-block .component.searchbar #search-form button {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+}
