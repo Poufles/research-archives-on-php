@@ -1,4 +1,4 @@
-<?php include __DIR__ . "/../../controllers/directories/read_archives.php"; ?>
+<?php include __DIR__ . "/../../controllers/directories/show_all_archives.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,12 +20,17 @@
     <br>
     <br>
     <hr>
-    <p>Read Business and Marketing</p>
+    <p>Read Others</p>
     <?php
-    print_r($archives);
-    // foreach ($archives as $archive) {
-    //     echo "<a href='download.php?file=$archive'>$archive</a><br>";
-    // }
+    foreach ($archives as $archive) {
+        $title = $archive["title"];
+
+        // AI was used here
+        echo "<a href='view_archive.php?title=" . urlencode($title) . "'>";
+        echo $title;
+        echo "</a><br>";
+        // AI was used here
+    }
     ?>
 </body>
 

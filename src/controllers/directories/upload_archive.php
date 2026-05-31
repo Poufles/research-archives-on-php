@@ -8,9 +8,12 @@ include __DIR__ . "/../utils/CategoryToDirectory.php";
 function SaveByCategory($archive)
 {
 
-    $jsonFile =
-        "../../../database/directories/" . CategoryToDirectory($archive["category"]) . "/archives.json";
+    $categoryDir = "../../../database/directories/" .
+        CategoryToDirectory($archive["category"]) . "/";
 
+    $jsonFile = $categoryDir . "archives.json";
+
+    // Block for saving archive contents
     if (!is_file($jsonFile)) file_put_contents($jsonFile, json_encode([], JSON_PRETTY_PRINT));
 
 
@@ -22,6 +25,16 @@ function SaveByCategory($archive)
         $jsonFile,
         json_encode($data, JSON_PRETTY_PRINT)
     );
+    // Block for saving archive contents
+
+    // Block for saving file
+    $destination = $categoryDir . $archive["file"]["name"];
+
+    move_uploaded_file(
+        $archive["file"]["tmp_name"],
+        $destination
+    );
+    // Block for saving file
 };
 
 /**
@@ -80,8 +93,9 @@ function SaveByTitle($archive)
 /**
  * @param object $archive
  */
-function SaveToUser($archive) {
-    
+function SaveToUser($archive)
+{
+
     $jsonFile =
         "../../../database/user_data/" . $archive['username'] . "/uploads.json";
 
