@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    
     <a href="../src/pages/auth/register.php">Registration Page</a>
     <br>
     <a href="../src/pages/auth/login.php">Login Page</a>

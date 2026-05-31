@@ -3,6 +3,5 @@
     "password": "password",
     "email": "mail@mail.com",
     "gender": "gender",
-    "telephone": "telephone",
     "status": "status"
 }
