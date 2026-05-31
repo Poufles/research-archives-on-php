@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/index.css">
-    <script src="../src/components/BrowseDropdown.js" defer></script>
+    <script src="../src/components/BrowseDropdown/BrowseDropdown.js" defer></script>
     <title>Arc Hive - Homepage</title>
 </head>
 
@@ -29,7 +29,7 @@
                 </div>
                 <div class="dropdown-body disabled">
                     <?php
-                    include __DIR__ . "/../src/components/BrowseDropdown.php";
+                    include __DIR__ . "/../src/components/BrowseDropdown/BrowseDropdown.php";
 
                     BrowseDropdown();
                     ?>

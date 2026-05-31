@@ -28,7 +28,7 @@
             <input type="submit" name="login" value="Log in!">
         </div>
         <div id="actions-alt">
-            <span>No account? Click </span><a href="./registration.php">here</a><span>.</span>            
+            <span>No account? Click </span><a href="./register.php">here</a><span>.</span>            
         </div>
     </form>
 </body>
