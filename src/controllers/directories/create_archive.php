@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 $newArchiveInfo = [
     "username" => null,
     "category" => null,
@@ -27,10 +25,10 @@ if (isset($_POST["submit"])) {
     foreach ($inputFields as $key => $value) {
         if ($inputFields[$key]) {
             $isFieldsComplete = false;
-            
+
             break;
         };
-            
+
         if ($key == "file") {
             $newArchiveInfo[$key] = $_FILES["file"];
             break;
@@ -41,12 +39,14 @@ if (isset($_POST["submit"])) {
 
     if ($isFieldsComplete) {
         $newArchiveInfo["username"] = $_SESSION["username"];
+        echo $_POST['category'];
 
         include __DIR__ . "/upload_archive.php";
         SaveByCategory($newArchiveInfo);
         SaveByAuthors($newArchiveInfo);
         SaveByTitle($newArchiveInfo);
         SaveToUser($newArchiveInfo);
+
+        header("location: ../../../public/");
     };
 };
-?>

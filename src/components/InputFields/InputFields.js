@@ -1,11 +1,17 @@
+let form = document.querySelector('form');
+
 let componentInputsArr = document.querySelectorAll('form .component.input-field');
 
 componentInputsArr.forEach(inputField => {
-    let input = inputField.querySelector('input');
+    let input =
+        inputField.querySelector('input') ||
+        inputField.querySelector('textarea');
 
     input.addEventListener('input', (e) => {
         let svgHint = inputField.querySelector('.svg-hint');
         let value = input.value;
+
+        if (!svgHint) return;
 
         if (value !== '') svgHint.classList.remove('disabled');
         else svgHint.classList.add('disabled');
@@ -64,4 +70,24 @@ componentInputsArr.forEach(inputField => {
         });
     };
 
+});
+
+let textareas = document.body.querySelectorAll(".component.input-field textarea");
+
+textareas.forEach(textarea => {
+    textarea.addEventListener("input", () => {
+        textarea.style.height = "auto";
+        textarea.style.height = textarea.scrollHeight + "px";
+    });
+});
+
+let fileUploads = document.querySelectorAll('.component.file-upload');
+
+fileUploads.forEach(fileUpload => {
+    const text = fileUpload.querySelector('.text');
+    const input = fileUpload.querySelector("input");
+
+    input.addEventListener("change", () => {
+        text.textContent = input.files[0]?.name || "Choose file (PDF)";
+    });
 });

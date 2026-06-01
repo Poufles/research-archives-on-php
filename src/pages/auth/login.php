@@ -13,6 +13,7 @@ include __DIR__ . "/../../components/Buttons/FormButton/GenericButton.php";
     <link rel="stylesheet" href="./../../../public/styles/index.css">
     <link rel="stylesheet" href="./auth.css">
     <link rel="stylesheet" href="./../../components/Buttons/FormButton/GenericButton.css">
+    <link rel="stylesheet" href="../../components/InputFields/InputFields.css">
     <script type="module" src="../../components/InputFields/InputFields.js" defer></script>
     <script type="module" src="../../components/Buttons/FormButton/GenericButton.js"></script>
     <title>Arc Hive - Login</title>

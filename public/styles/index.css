@@ -221,3 +221,17 @@ main {
     text-align: center;
     margin-bottom: 20px;
 }
+
+form .file-upload {
+    background-color: var(--primary-color);
+    border-radius: 7dpx;
+    color: var(--accent-color);
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+form .file-upload input {
+    display: none;
+}

@@ -1,9 +1,23 @@
 <?php
-function Searchbar()
+
+if (!empty($_SESSION['hasSearchItem']) && empty($_GET['search'])) {
+    $_SESSION['hasSearchItem'] = null;
+};
+
+if (!empty($_GET["search"])) {
+    $searchedItem = $_GET["search"];
+
+    if ($searchedItem != "") $_SESSION["hasSearchItem"] = $searchedItem;
+};
+
+/**
+ * @param bool $isNav
+ */
+function Searchbar($isNav = false)
 {
 ?>
     <div class="component searchbar <?php 
-    if (!empty($_GET['search'])) echo 'is-navbar';
+    if (!empty($_SESSION['hasSearchItem']) || $isNav) echo 'is-navbar';
     ?>">
         <div class="filter">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="var(--primary-color)">
@@ -20,10 +34,4 @@ function Searchbar()
         </form>
     </div>
 <?php
-
-    if (!empty($_GET["search"])) {
-        $searchedItem = $_GET["search"];
-
-        if ($searchedItem != '') $_SESSION["hasSearchItem"] = $searchedItem;
-    }
 };

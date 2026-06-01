@@ -29,7 +29,7 @@ include __DIR__ . "/../src/components/Searchbar/Searchbar.php";
         </div>
         <div id="nav-searchbar">
             <?php
-            if (!empty($_GET['search'])) {
+            if (!empty($_SESSION['hasSearchItem'])) {
                 Searchbar();
             }
             ?>
@@ -79,7 +79,7 @@ include __DIR__ . "/../src/components/Searchbar/Searchbar.php";
     </nav>
     <main>
         <?php
-        if (empty($_GET['search'])) {
+        if (empty($_SESSION['hasSearchItem'])) {
         ?>
             <div class="starting-block">
                 <div class="text">Learn something new from the Hive!</div>

@@ -56,13 +56,47 @@ function InputFieldDropdown($name, $placeholder, $svg, $dropdownList)
         <input type="dropdown" name="<?php echo $name ?>" id="" placeholder="<?php echo $placeholder ?>" readonly>
         <div class="dropdown-options disabled">
             <?php
-            foreach ($dropdownList as $option) {
+            foreach ($dropdownList as $key => $value) {
             ?>
-                <p class="option" tabindex="0"><?php echo $option ?></p>
+                <p class="option" tabindex="0" name="<?php echo $name ?>" value="<?php echo $value ?>"><?php echo $key ?><p>
             <?php
             };
             ?>
         </div>
+    </div>
+<?php
+};
+
+/**
+ * @param string $name
+ * @param string $placeholder
+ * @param string $svg
+ */
+function InputFieldDate($name, $placeholder, $svg)
+{
+?>
+    <div class="component input-field" tabindex="0">
+        <div class="svg-hint disabled">
+            <?php echo $svg ?>
+        </div>
+        <input type="date" name="<?php echo $name ?>" id="" placeholder="<?php echo $placeholder ?>">
+    </div>
+<?php
+};
+
+/**
+ * @param string $name
+ * @param string $placeholder
+ * @param string $svg
+ */
+function InputFieldTextArea($name, $placeholder, $svg)
+{
+?>
+    <div class="component input-field" tabindex="0">
+        <div class="svg-hint disabled">
+            <?php echo $svg ?>
+        </div>
+        <textarea name="<?php echo $name ?>" id="" placeholder="<?php echo $placeholder ?>" id=""></textarea>
     </div>
 <?php
 };

@@ -9,7 +9,7 @@ function SaveByCategory($archive)
 {
 
     $categoryDir = "../../../database/directories/" .
-        CategoryToDirectory($archive["category"]) . "/";
+        CategoryToDirectoryV2($archive["category"]) . "/";
 
     $jsonFile = $categoryDir . "archives.json";
 
