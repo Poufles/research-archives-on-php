@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 $newArchiveInfo = [
     "username" => null,
     "category" => null,
@@ -27,10 +25,10 @@ if (isset($_POST["submit"])) {
     foreach ($inputFields as $key => $value) {
         if ($inputFields[$key]) {
             $isFieldsComplete = false;
-            
+
             break;
         };
-            
+
         if ($key == "file") {
             $newArchiveInfo[$key] = $_FILES["file"];
             break;
@@ -47,6 +45,9 @@ if (isset($_POST["submit"])) {
         SaveByAuthors($newArchiveInfo);
         SaveByTitle($newArchiveInfo);
         SaveToUser($newArchiveInfo);
+
+        $_SESSION["research"] = $newArchiveInfo['title'];
+
+        header("location: ../../../src/pages/directories/view_archive.php");
     };
 };
-?>

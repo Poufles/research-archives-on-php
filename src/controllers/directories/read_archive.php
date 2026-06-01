@@ -6,7 +6,7 @@ $category = $_GET["category"] ?? "";
 $file = $_GET["file"] ?? "";
 
 $path = 
-    "../../../database/directories/" . CategoryToDirectory($category) . "/" . $file;
+    "../../../database/directories/" . CategoryToDirectoryV2($category) . "/" . $file;
 
 // AI was used here
 header("Content-Type: application/pdf");

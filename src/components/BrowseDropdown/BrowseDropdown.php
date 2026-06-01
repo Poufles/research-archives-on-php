@@ -2,6 +2,8 @@
 
 function BrowseDropdown()
 {
+    
+
     $browseObj = [
         "allStudies" => "All Studies",
         "businessAndMarketing" => "Business and Marketing",
@@ -20,7 +22,9 @@ function BrowseDropdown()
     foreach($browseObj as $key => $value) {
 ?>
     <div class="dropdown-options">
-        <a href="<?php echo "../src/pages/directories/research_archives.php?category=" . urlencode($key)  ?>"><?php echo $value ?></a>
+        <a href="<?php
+        echo ToDestination('index') . "?category=" . urlencode($key);
+        ?>"><?php echo $value ?></a>
     </div>
 <?php
     };
