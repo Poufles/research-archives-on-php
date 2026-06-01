@@ -4,6 +4,8 @@ let dropdownBody = document.querySelector('.dropdown-body');
 dropdownHead.addEventListener('click', (e) => {
     e.stopPropagation();
     dropdownBody.classList.toggle('disabled');
+
+    if (!userActions.classList.contains('disabled')) userActions.classList.add('disabled'); 
 });
 
 document.body.addEventListener('click', (e) => {

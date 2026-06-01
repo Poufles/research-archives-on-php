@@ -27,7 +27,10 @@ if (isset($_POST["login"])) {
 
             if ($password == $profileData["password"]) {
                 $_SESSION["username"] = $username;
-                header("location: ../../pages/directories/research_archives.php");
+
+                setcookie("inSession", true, time() + 9999, "/");
+                var_dump($_COOKIE["inSession"]);
+                header("location:../../../public/");
             };
         };
     };
