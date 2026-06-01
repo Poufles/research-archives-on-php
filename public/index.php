@@ -2,6 +2,8 @@
 include __DIR__ . "/../src/controllers/utils/CheckInSession.php";
 include __DIR__ . "/../src/controllers/auth/logout_user.php";
 include __DIR__ . "/../src/components/Searchbar/Searchbar.php";
+
+SetPage('index');
 ?>
 
 <!DOCTYPE html>

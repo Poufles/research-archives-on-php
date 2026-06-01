@@ -6,6 +6,8 @@ include __DIR__ . "/../../components/Searchbar/Searchbar.php";
 include __DIR__ . "/../../components/BrowseDropdown/BrowseDropdown.php";
 include __DIR__ . "/../../components/InputFields/InputFields.php";
 include __DIR__ . "/../../components/Buttons/FormButton/GenericButton.php";
+
+SetPage('upload');
 ?>
 
 <!DOCTYPE html>
