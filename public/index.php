@@ -11,6 +11,7 @@ include __DIR__ . "/../src/components/Searchbar/Searchbar.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="../src/components/Searchbar/Searchbar.css">
     <script src="../src/components/BrowseDropdown/BrowseDropdown.js" defer></script>
     <script src="../src/components/UserProfileDropdown/UserProfileDropdown.js" defer></script>
     <title>Arc Hive - Homepage</title>
@@ -27,8 +28,10 @@ include __DIR__ . "/../src/components/Searchbar/Searchbar.php";
             </a>
         </div>
         <div id="nav-searchbar">
-            <?php 
-            
+            <?php
+            if (!empty($_GET['search'])) {
+                Searchbar();
+            }
             ?>
         </div>
         <div id="nav-actions">
@@ -54,33 +57,39 @@ include __DIR__ . "/../src/components/Searchbar/Searchbar.php";
             <?php
             } else {
             ?>
-            <div class="component user-setting">
-                <div class="account-icon-container">
-                    <span id="account-name"><?php echo $_SESSION["username"]; ?></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="var(--accent-color)">
-                        <path d="M324.5-404.5Q310-419 310-440t14.5-35.5Q339-490 360-490t35.5 14.5Q410-461 410-440t-14.5 35.5Q381-390 360-390t-35.5-14.5Zm240 0Q550-419 550-440t14.5-35.5Q579-490 600-490t35.5 14.5Q650-461 650-440t-14.5 35.5Q621-390 600-390t-35.5-14.5ZM480-160q134 0 227-93t93-227q0-24-3-46.5T786-570q-21 5-42 7.5t-44 2.5q-91 0-172-39T390-708q-32 78-91.5 135.5T160-486v6q0 134 93 227t227 93Zm0 80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-54-715q42 70 114 112.5T700-640q14 0 27-1.5t27-3.5q-42-70-114-112.5T480-800q-14 0-27 1.5t-27 3.5ZM177-581q51-29 89-75t57-103q-51 29-89 75t-57 103Zm249-214Zm-103 36Z" />
-                    </svg>
+                <div class="component user-setting">
+                    <div class="account-icon-container">
+                        <span id="account-name"><?php echo $_SESSION["username"]; ?></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="var(--accent-color)">
+                            <path d="M324.5-404.5Q310-419 310-440t14.5-35.5Q339-490 360-490t35.5 14.5Q410-461 410-440t-14.5 35.5Q381-390 360-390t-35.5-14.5Zm240 0Q550-419 550-440t14.5-35.5Q579-490 600-490t35.5 14.5Q650-461 650-440t-14.5 35.5Q621-390 600-390t-35.5-14.5ZM480-160q134 0 227-93t93-227q0-24-3-46.5T786-570q-21 5-42 7.5t-44 2.5q-91 0-172-39T390-708q-32 78-91.5 135.5T160-486v6q0 134 93 227t227 93Zm0 80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-54-715q42 70 114 112.5T700-640q14 0 27-1.5t27-3.5q-42-70-114-112.5T480-800q-14 0-27 1.5t-27 3.5ZM177-581q51-29 89-75t57-103q-51 29-89 75t-57 103Zm249-214Zm-103 36Z" />
+                        </svg>
+                    </div>
+                    <div class="user-actions disabled">
+                        <a href="./">Hive Settings</a>
+                        <a href="../src/pages/directories/research_register.php">Create an Archive</a>
+                        <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                            <input type="submit" value="Hive out" name="logout">
+                        </form>
+                    </div>
                 </div>
-                <div class="user-actions disabled">
-                    <a href="./">Hive Settings</a>
-                    <a href="../src/pages/directories/research_register.php">Create an Archive</a>
-                    <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                        <input type="submit" value="Hive out" name="logout">
-                    </form>
-                </div>
-            </div>
-            <?php 
+            <?php
             }
             ?>
         </div>
     </nav>
     <main>
-        <div class="starting-block">
-            <div class="text">Learn something new from the Hive!</div>
-            <?php 
+        <?php
+        if (empty($_GET['search'])) {
+        ?>
+            <div class="starting-block">
+                <div class="text">Learn something new from the Hive!</div>
+                <?php
                 Searchbar();
-            ?>
-        </div>
+                ?>
+            </div>
+        <?php
+        };
+        ?>
     </main>
 </body>
 
