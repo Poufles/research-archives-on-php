@@ -1,0 +1,45 @@
+.component.searchbar {
+    border: 4px solid var(--primary-color);
+    border-radius: 50px;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.component.searchbar.is-navbar {
+    height: 45px;
+    max-width: 700px;
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.component.searchbar #search-form {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+}
+
+.component.searchbar #search-form input {
+    flex-grow: 1 1 auto;
+
+    background-color: transparent;
+    border: none;
+    color: var(--primary-color);
+    width: 100%;
+    outline: transparent;
+
+    &::placeholder {
+        color: var(--primary-color);
+    }
+}
+
+.component.searchbar #search-form button {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+}
