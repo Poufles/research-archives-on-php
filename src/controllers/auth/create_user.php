@@ -8,7 +8,6 @@ $userCredentials = [
     "password" => null,
     "email" => null,
     "gender" => null,
-    "telephone" => null,
     "status" => null
 ];
 
@@ -18,7 +17,6 @@ $fieldStatus = [
     "password" => "unset",
     "email" => "unset",
     "gender" => "unset",
-    "telephone" => "unset",
     "status" => "unset"
 ];
 
@@ -40,7 +38,6 @@ if (isset($_POST["submit"])) {
         "password" => empty($_POST["password"]),
         "email" => empty($_POST["email"]),
         "gender" => empty($_POST["gender"]),
-        "telephone" => empty($_POST["telephone"]),
         "status" => empty($_POST["status"]),
     ];
 
@@ -77,29 +74,7 @@ if (isset($_POST["submit"])) {
 
         $_SESSION["username"] = $userCredentials["username"];
 
-        header("location: ../../pages/directories/research_archives.php");
+        setcookie("inSession", true, time() + 9999, "/");
+        header("location:../../../public/");
     };
 };
-
-/**
- * To show that the input field is empty
- * @param string $inputField
- */
-function MessageInputFieldEmpty($inputField)
-{
-?>
-    <span class="input-empty-error">Please enter a <?php echo $inputField ?>!</span>
-<?php
-}
-
-/**
- * To show that the input is a duplicate
- * @param string $inputField
- */
-function MessageInputFieldDuplicate($inputField)
-{
-?>
-    <span class="input-empty-error"><?php echo $inputField ?> already exists!</span>
-<?php
-}
-?>
