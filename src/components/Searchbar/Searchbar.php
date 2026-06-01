@@ -1,5 +1,4 @@
 <?php
-include __DIR__ . "/../../controllers/utils/PathHandler.php";
 
 if (!empty($_SESSION['hasSearchItem']) && empty($_GET['search'])) {
     $_SESSION['hasSearchItem'] = null;

@@ -235,3 +235,65 @@ form .file-upload {
 form .file-upload input {
     display: none;
 }
+
+.view-contents {
+    /* border: 2px solid red; */
+    max-width: 700px;
+    width: 100%;
+    height: calc(100% - 125px);
+    margin-top: 125px;
+}
+
+.view-contents #category-box {
+    border-left: 3px solid var(--primary-color);
+    color: var(--primary-color);
+    font-size: 28px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.view-contents #archiver-box {
+    color: var(--primary-color);
+    margin-top: 3px;
+    margin-left: -10px;
+    margin-bottom: 50px;
+    display: flex;
+    gap: 2px;
+    align-items: center;
+}
+
+.view-contents #summary-contents {
+    color: var(--primary-color);
+}
+
+.view-contents #summary-contents #title-box #title {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.view-contents #summary-contents #author-year-box {
+    margin-bottom: 50px;
+}
+
+.view-contents #summary-contents #abstract-box p:first-of-type {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.view-contents #summary-contents #action-box {
+    display: flex;
+    justify-content: right;
+}
+
+.view-contents #summary-contents #action-box #view-link {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    color: var(--accent-color);
+    font-size: 14px;
+    text-decoration: none;
+    padding:  15px;
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    justify-content: center;
+}

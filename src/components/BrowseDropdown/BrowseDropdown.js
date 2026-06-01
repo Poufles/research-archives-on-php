@@ -5,6 +5,7 @@ dropdownHead.addEventListener('click', (e) => {
     e.stopPropagation();
     dropdownBody.classList.toggle('disabled');
 
+    let userActions = document.querySelector('nav .user-setting .user-actions');
     if (!userActions.classList.contains('disabled')) userActions.classList.add('disabled'); 
 });
 

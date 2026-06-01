@@ -9,10 +9,10 @@ function SetPage($currentPage)
 };
 
 /**
- * @param string $GetPage
+ * 
  */
 function GetPage() {
-    return $_SESSION['currentpage'];
+    if (isset($_SESSION['currentpage'])) return $_SESSION['currentpage'];
 };
 
 /**
@@ -24,4 +24,21 @@ function ToDestination($destination) {
     if ($from == 'index' && $destination == 'index') return './';
 
     if ($from == 'upload' && $destination == 'index') return '../../../public/';
+   
+    if ($from == 'view' && $destination == 'index') return '../../../public/';
 }
+
+function PathBuilder() {
+    // Catchers
+    $search = $_GET['search'] ?? '';
+    $category = $_GET['category'] ?? '';
+    $title = $_GET['title'] ?? '';
+    $author = $_GET['author'] ?? '';
+
+    $url = '?';
+
+    if ($search != '') $url = $url . "search=" . $search; 
+    if ($category != '') $url = $url . "&category=" . $category; 
+    if ($title != '') $url = $url . "&title=" . $title; 
+    if ($author != '') $url = $url . "&author=" . $author; 
+};

@@ -6,6 +6,7 @@ accountIconContainer.addEventListener('click', (e) => {
     e.stopPropagation();
     userActions.classList.toggle('disabled');
 
+    const dropdownBody = document.querySelector('nav .dropdown-body');
     if (!dropdownBody.classList.contains('disabled')) dropdownBody.classList.add('disabled');  
 });
 

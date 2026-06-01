@@ -37,10 +37,8 @@ if (isset($_POST["submit"])) {
         $newArchiveInfo[$key] = $_POST[$key];
     };
 
-    echo "Hello There";
     if ($isFieldsComplete) {
         $newArchiveInfo["username"] = $_SESSION["username"];
-        echo "COMPLETED";
 
         include __DIR__ . "/upload_archive.php";
         SaveByCategory($newArchiveInfo);
@@ -48,6 +46,8 @@ if (isset($_POST["submit"])) {
         SaveByTitle($newArchiveInfo);
         SaveToUser($newArchiveInfo);
 
-        // header("location: ../../../public/");
+        $_SESSION["research"] = $newArchiveInfo['title'];
+
+        header("location: ../../../src/pages/directories/view_archive.php");
     };
 };
