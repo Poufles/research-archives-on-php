@@ -12,7 +12,7 @@ if (isset($_POST["login"])) {
         $username = $_POST["username"];
         $password = $_POST["password"];
 
-        $profilePath = "../../../database/user_data/" . $username . "/profile.json";
+        $profilePath = __DIR__ . "/../../../database/user_data/" . $username . "/profile.json";
 
         $isAccountExist = true;
         if (!file_exists($profilePath)) {
@@ -28,9 +28,8 @@ if (isset($_POST["login"])) {
             if ($password == $profileData["password"]) {
                 $_SESSION["username"] = $username;
 
-                setcookie("inSession", true, time() + 9999, "/");
-                var_dump($_COOKIE["inSession"]);
-                header("location:../../../public/");
+                setcookie("archive-insession", true, time() + 9999, "/");
+                header("location: ./");
             };
         };
     };

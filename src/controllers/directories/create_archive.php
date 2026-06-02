@@ -41,13 +41,12 @@ if (isset($_POST["submit"])) {
         $newArchiveInfo["username"] = $_SESSION["username"];
 
         include __DIR__ . "/upload_archive.php";
-        SaveByCategory($newArchiveInfo);
-        SaveByAuthors($newArchiveInfo);
-        SaveByTitle($newArchiveInfo);
+
+        SaveToDirectory($newArchiveInfo);
         SaveToUser($newArchiveInfo);
 
         $_SESSION["research"] = $newArchiveInfo['title'];
 
-        header("location: ../../../src/pages/directories/view_archive.php");
+        header("location: ./view_archive.php");
     };
 };

@@ -23,7 +23,7 @@ $fieldStatus = [
 if (isset($_POST["submit"])) {
 
     // Checks if username already exists
-    $baseDir = "../../../database/user_data/";
+    $baseDir = __DIR__ . "/../../../database/user_data/";
     if (!empty($_POST["username"])) {
 
         $verifyUsername = $_POST["username"];
@@ -74,7 +74,7 @@ if (isset($_POST["submit"])) {
 
         $_SESSION["username"] = $userCredentials["username"];
 
-        setcookie("inSession", true, time() + 9999, "/");
-        header("location:../../../public/");
+        setcookie("archive-insession", true, time() + 9999, "/");
+        header("location: ./");
     };
 };
