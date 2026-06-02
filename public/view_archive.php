@@ -18,7 +18,7 @@ include __DIR__ . "/../src/components/BrowseDropdown/BrowseDropdown.php";
     <link rel="stylesheet" href="../src/components/Searchbar/Searchbar.css">
     <script src="../src/components/BrowseDropdown/BrowseDropdown.js" defer></script>
     <script src="../src/components/UserProfileDropdown/UserProfileDropdown.js" defer></script>
-    <title>Arc Hive - Viewing <?php  ?></title>
+    <title>Arc Hive - Viewing <?php echo $researchInfo['title'] ?></title>
 </head>
 
 <body>
@@ -33,7 +33,7 @@ include __DIR__ . "/../src/components/BrowseDropdown/BrowseDropdown.php";
         </div>
         <div id="nav-searchbar">
             <?php
-                Searchbar(true);
+            Searchbar(true);
             ?>
         </div>
         <div id="nav-actions">
@@ -46,8 +46,6 @@ include __DIR__ . "/../src/components/BrowseDropdown/BrowseDropdown.php";
                 </div>
                 <div class="dropdown-body disabled">
                     <?php
-                    include __DIR__ . "/../src/components/BrowseDropdown/BrowseDropdown.php";
-
                     BrowseDropdown();
                     ?>
                 </div>
@@ -83,7 +81,7 @@ include __DIR__ . "/../src/components/BrowseDropdown/BrowseDropdown.php";
         <div class="view-contents">
             <div id="category-box">
                 <p id="category">
-                    <?php echo $archiveInfo["category"] ?>
+                    <?php echo $researchInfo['category'] ?>
                 </p>
             </div>
             <div id="archiver-box">
@@ -91,31 +89,31 @@ include __DIR__ . "/../src/components/BrowseDropdown/BrowseDropdown.php";
                     <path d="M324.5-404.5Q310-419 310-440t14.5-35.5Q339-490 360-490t35.5 14.5Q410-461 410-440t-14.5 35.5Q381-390 360-390t-35.5-14.5Zm240 0Q550-419 550-440t14.5-35.5Q579-490 600-490t35.5 14.5Q650-461 650-440t-14.5 35.5Q621-390 600-390t-35.5-14.5ZM480-160q134 0 227-93t93-227q0-24-3-46.5T786-570q-21 5-42 7.5t-44 2.5q-91 0-172-39T390-708q-32 78-91.5 135.5T160-486v6q0 134 93 227t227 93Zm0 80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-54-715q42 70 114 112.5T700-640q14 0 27-1.5t27-3.5q-42-70-114-112.5T480-800q-14 0-27 1.5t-27 3.5ZM177-581q51-29 89-75t57-103q-51 29-89 75t-57 103Zm249-214Zm-103 36Z" />
                 </svg>
                 <p id="archiver">
-                    <?php echo $archiveInfo["username"] ?>
+                    <?php echo $researchInfo['username'] ?>
                 </p>
             </div>
             <div id="summary-contents">
                 <div id="title-box">
                     <p id="title">
-                        <?php echo $archiveInfo["title"] ?>
+                        <?php echo $researchInfo['title'] ?>
                     </p>
                 </div>
                 <div id="author-year-box">
                     <p id="author">
-                        Author(s): <?php echo $archiveInfo["author"] ?>
+                        Author(s): <?php echo $researchInfo['author']; ?>
                     </p>
                     <p id="year">
-                        Published Year: <?php echo $archiveInfo["year"] ?>
+                        Published Year: <?php echo $researchInfo['year']; ?>
                     </p>
                 </div>
                 <div id="abstract-box">
                     <p>Abstract</p>
                     <p id="abstract">
-                        <?php echo $archiveInfo["abstract"] ?>
+                        <?php echo $researchInfo['abstract']; ?>
                     </p>
                 </div>
                 <div id="action-box">
-                    <a id="view-link" href="../../controllers/directories/read_archive.php?category=<?php echo urlencode($archiveInfo["category"]); ?>&file=<?php echo urlencode($archiveInfo["file"]["name"]); ?>" target="_blank" rel="noopener noreferrer">
+                    <a id="view-link" href="../src/controllers/directories/read_archive.php?file=<?php echo urlencode($researchInfo['file']['name']); ?>" target="_blank" rel="noopener noreferrer">
                         <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFF">
                             <path d="M360-460h40v-80h40q17 0 28.5-11.5T480-580v-40q0-17-11.5-28.5T440-660h-80v200Zm40-120v-40h40v40h-40Zm120 120h80q17 0 28.5-11.5T640-500v-120q0-17-11.5-28.5T600-660h-80v200Zm40-40v-120h40v120h-40Zm120 40h40v-80h40v-40h-40v-40h40v-40h-80v200ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z" />
                         </svg>

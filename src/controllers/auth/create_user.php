@@ -74,7 +74,7 @@ if (isset($_POST["submit"])) {
 
         $_SESSION["username"] = $userCredentials["username"];
 
-        setcookie("inSession", true, time() + 9999, "/");
-        header("location: ../../../public/");
+        setcookie("archive-insession", true, time() + 9999, "/");
+        header("location: ./");
     };
 };

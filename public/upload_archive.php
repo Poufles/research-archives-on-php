@@ -8,6 +8,7 @@ include __DIR__ . "/../src/components/Searchbar/Searchbar.php";
 include __DIR__ . "/../src/components/InputFields/InputFields.php";
 include __DIR__ . "/../src/components/Buttons/FormButton/GenericButton.php";
 
+if (!isset($_COOKIE["archive-insession"])) header("location: ./login.php");
 ?>
 
 <!DOCTYPE html>
@@ -64,6 +65,7 @@ include __DIR__ . "/../src/components/Buttons/FormButton/GenericButton.php";
             <?php
             } else {
             ?>
+            
                 <div class="component user-setting">
                     <div class="account-icon-container">
                         <span id="account-name"><?php echo $_SESSION["username"]; ?></span>

@@ -1,15 +1,18 @@
 <?php
 
-include __DIR__ .  '/../utils/TitleToCategory.php';
-include __DIR__ .  '/../utils/CategoryToDirectory.php';
-
 $titleFromURL = $_SESSION["research"];
-$category = TitleToCategory($titleFromURL);
 
-$categoryDir =
-    "../../../database/directories/" . CategoryToDirectoryV2($category) . "/";
+$database = __DIR__ . "/../../../database/directories/";
+$jsonFile = $database . "archives.json";
 
-$archivesJSON = file_get_contents($categoryDir . "archives.json");
-$contents = json_decode($archivesJSON, true);
+$json = file_get_contents($jsonFile);
+$contents = json_decode($json, true);
 
-$archiveInfo = $contents[$titleFromURL];
+for ($iter = 0; $iter < count($contents); $iter++) {
+    $titleFromJSON = $contents[$iter]['title'];
+
+    if ($titleFromURL == $titleFromJSON) {
+        $researchInfo = $contents[$iter];
+        break;
+    };
+};

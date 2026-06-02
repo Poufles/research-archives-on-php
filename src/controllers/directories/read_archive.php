@@ -2,11 +2,9 @@
 
 include __DIR__ . "/../utils/CategoryToDirectory.php";
 
-$category = $_GET["category"] ?? "";
 $file = $_GET["file"] ?? "";
 
-$path = 
-    "../../../database/directories/" . CategoryToDirectoryV2($category) . "/" . $file;
+$path = __DIR__ . "/../../../database/directories/" . $file;
 
 // AI was used here
 header("Content-Type: application/pdf");

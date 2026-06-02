@@ -2,6 +2,8 @@
 include __DIR__ . "/../src/controllers/auth/login_user.php"; 
 include __DIR__ . "/../src/components/InputFields/InputFields.php";
 include __DIR__ . "/../src/components/Buttons/FormButton/GenericButton.php";
+
+if (isset($_COOKIE["archive-insession"])) header("location: ./");
 ?>
 
 <!DOCTYPE html>

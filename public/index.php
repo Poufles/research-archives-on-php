@@ -55,7 +55,7 @@ include __DIR__ . "/../src/components/Searchbar/Searchbar.php";
             <?php
             if (!$hasUsername) {
             ?>
-                <a href="../src/pages/auth/register.php" id="register">Register</a>
+                <a href="./register.php" id="register">Register</a>
             <?php
             } else {
             ?>
