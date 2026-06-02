@@ -5,89 +5,34 @@ include __DIR__ . "/../utils/CategoryToDirectory.php";
 /**
  * @param object $archive
  */
-function SaveByCategory($archive)
+function SaveToDirectory($archive)
 {
 
-    $categoryDir = "../../../database/directories/" .
-        CategoryToDirectoryV2($archive["category"]) . "/";
-
+    $categoryDir = __DIR__ . "/../../../database/directories/";
     $jsonFile = $categoryDir . "archives.json";
 
     // Block for saving archive contents
     if (!is_file($jsonFile)) file_put_contents($jsonFile, json_encode([], JSON_PRETTY_PRINT));
 
-
+    echo $categoryDir;
+    // Retrieve data
     $data = json_decode(file_get_contents($jsonFile), true);
 
-    $data[$archive["title"]] = $archive;
-
+    array_push($data, $archive);
+    // Archive the data
     file_put_contents(
         $jsonFile,
         json_encode($data, JSON_PRETTY_PRINT)
     );
-    // Block for saving archive contents
 
-    // Block for saving file
+    // Block for saving file //
     $destination = $categoryDir . $archive["file"]["name"];
 
     move_uploaded_file(
         $archive["file"]["tmp_name"],
         $destination
     );
-    // Block for saving file
-};
-
-/**
- * @param object $archive
- */
-function SaveByAuthors($archive)
-{
-
-    $jsonFile =
-        "../../../database/authors/authors.json";
-
-    $data = json_decode(file_get_contents($jsonFile), true);
-
-    $author = $archive["author"];
-
-    if (!empty($data[$author])) {
-        array_push(
-            $data[$author],
-            [
-                "title" => $archive["title"],
-                "category" => $archive["category"]
-            ]
-        );
-    } else {
-        $data[$author] = [[
-            "title" => $archive["title"],
-            "category" => $archive["category"]
-        ]];
-    };
-
-    file_put_contents(
-        $jsonFile,
-        json_encode($data, JSON_PRETTY_PRINT)
-    );
-};
-
-/**
- * @param object $archive
- */
-function SaveByTitle($archive)
-{
-
-    $jsonFile =
-        "../../../database/titles/titles.json";
-
-    $data = json_decode(file_get_contents($jsonFile), true);
-
-    $data[$archive["title"]] = $archive["category"];
-
-    file_put_contents(
-        $jsonFile,
-        json_encode($data, JSON_PRETTY_PRINT)
-    );
+    // Block for saving file //
 };
 
 /**
@@ -96,8 +41,7 @@ function SaveByTitle($archive)
 function SaveToUser($archive)
 {
 
-    $jsonFile =
-        "../../../database/user_data/" . $archive['username'] . "/uploads.json";
+    $jsonFile = __DIR__ . "/../../../database/user_data/" .$archive["username"] . "/uploads.json";
 
     $data = json_decode(file_get_contents($jsonFile), true);
 

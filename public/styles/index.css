@@ -297,3 +297,38 @@ form .file-upload input {
     align-items: center;
     justify-content: center;
 }
+
+.auth-card {
+    border: 3px solid var(--primary-color);
+    border-radius: 7px;
+    box-shadow: 0 3px 3px 2px #00000033;
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    position: relative;
+}
+
+.auth-card > a.logo {
+    color: var(--primary-color);
+    font-size: 32px;
+    font-weight: bold;
+    text-decoration: none;
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: calc(100% + 20px);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.auth-card .header {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.auth-card .header .title {
+    font-size: 30px;
+    font-weight: bold;
+}

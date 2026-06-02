@@ -4,7 +4,6 @@ include __DIR__ . "/../src/controllers/utils/PathHandler.php";
 include __DIR__ . "/../src/controllers/auth/logout_user.php";
 include __DIR__ . "/../src/components/Searchbar/Searchbar.php";
 
-SetPage('index');
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +68,7 @@ SetPage('index');
                     </div>
                     <div class="user-actions disabled">
                         <a href="./">Hive Settings</a>
-                        <a href="../src/pages/directories/research_register.php">Create an Archive</a>
+                        <a href="./upload_archive.php">Create an Archive</a>
                         <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                             <input type="submit" value="Hive out" name="logout">
                         </form>
