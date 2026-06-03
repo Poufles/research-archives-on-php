@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__ . "/../utils/CategoryToDirectory.php";
+// include __DIR__ . "/../utils/CategoryToDirectory.php";
 
 /**
  * @param object $archive
@@ -8,25 +8,26 @@ include __DIR__ . "/../utils/CategoryToDirectory.php";
 function SaveToDirectory($archive)
 {
 
-    $categoryDir = __DIR__ . "/../../../database/directories/";
-    $jsonFile = $categoryDir . "archives.json";
+    print_r($archive);
+    $baseDir = __DIR__ . "/../../../database/directories/";
+    $path = $baseDir . "archives.txt";
 
-    // Block for saving archive contents
-    if (!is_file($jsonFile)) file_put_contents($jsonFile, json_encode([], JSON_PRETTY_PRINT));
+    if (!is_file($path)) file_put_contents($path, '', FILE_APPEND);
 
-    echo $categoryDir;
     // Retrieve data
-    $data = json_decode(file_get_contents($jsonFile), true);
+    $newArchive =
+        $archive['title'] . "\n" .
+        $archive['category'] . "\n" .
+        $archive['author'] . "\n" .
+        $archive['year'] . "\n" .
+        $archive['abstract'] . "\n" .
+        $archive['username'] . "\n" .
+        $archive['file']['name'] . "\n";
 
-    array_push($data, $archive);
-    // Archive the data
-    file_put_contents(
-        $jsonFile,
-        json_encode($data, JSON_PRETTY_PRINT)
-    );
+    file_put_contents($path, $newArchive, FILE_APPEND);
 
     // Block for saving file //
-    $destination = $categoryDir . $archive["file"]["name"];
+    $destination = $baseDir . $archive["file"]["name"];
 
     move_uploaded_file(
         $archive["file"]["tmp_name"],
@@ -41,17 +42,13 @@ function SaveToDirectory($archive)
 function SaveToUser($archive)
 {
 
-    $jsonFile = __DIR__ . "/../../../database/user_data/" .$archive["username"] . "/uploads.json";
+    $fileDir = __DIR__ . "/../../../database/user_data/" . $archive["username"] . "/uploads.txt";
 
-    $data = json_decode(file_get_contents($jsonFile), true);
+    if (!is_file($fileDir)) file_put_contents($fileDir, '', FILE_APPEND);
 
-    array_push($data, [
-        "title" => $archive["title"],
-        "category" => $archive["category"]
-    ]);
+    $newArchive = 
+        $archive['title'] . "\n" .
+        $archive['category'] . "\n";
 
-    file_put_contents(
-        $jsonFile,
-        json_encode($data, JSON_PRETTY_PRINT)
-    );
+    file_put_contents($fileDir, $newArchive, FILE_APPEND);
 };

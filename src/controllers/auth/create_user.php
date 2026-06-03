@@ -2,14 +2,6 @@
 
 session_start();
 
-// Variables : User Credentials
-// $userCredentials = [
-//     "username" => null,
-//     "password" => null,
-//     "email" => null,
-//     "gender" => null,
-//     "status" => null
-// ];
 $userCredentials = "";
 
 if (isset($_POST["submit"])) {
