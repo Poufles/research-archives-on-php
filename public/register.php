@@ -1,4 +1,4 @@
-<?php
+x<?php
 include __DIR__ . "/../src/controllers/auth/create_user.php";
 include __DIR__ . "/../src/components/InputFields/InputFields.php";
 include __DIR__ . "/../src/components/Buttons/FormButton/GenericButton.php";
