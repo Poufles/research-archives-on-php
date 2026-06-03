@@ -75,6 +75,14 @@ if (isset($_POST["submit"])) {
         $_SESSION["username"] = $userCredentials["username"];
 
         setcookie("archive-insession", true, time() + 9999, "/");
-        header("location: ./");
+        setcookie("archive-username", $userCredentials['username'], time() + 9999, "/");
+
+        if (isset($_COOKIE['archive-inview'])) {
+            $currentPage = $_COOKIE['archive-inview'];
+
+            header('location: ./view_archive.php?view=' . $currentPage);
+        } else {
+            header("location: ./");
+        };
     };
 };

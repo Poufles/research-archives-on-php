@@ -5,6 +5,7 @@ include __DIR__ . "/../src/controllers/auth/logout_user.php";
 include __DIR__ . "/../src/components/Searchbar/Searchbar.php";
 include __DIR__ . "/../src/controllers/utils/SearchQuery.php";
 
+if (isset($_COOKIE['archive-username'])) $_SESSION['username'] = $_COOKIE['archive-username'];
 $response = SearchQuery();
 ?>
 

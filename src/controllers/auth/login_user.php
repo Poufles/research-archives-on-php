@@ -29,7 +29,15 @@ if (isset($_POST["login"])) {
                 $_SESSION["username"] = $username;
 
                 setcookie("archive-insession", true, time() + 9999, "/");
-                header("location: ./");
+                setcookie("archive-username", $username, time() + 9999, "/");
+
+                if (isset($_COOKIE['archive-inview'])) {
+                    $currentPage = $_COOKIE['archive-inview'];
+
+                    header('location: ./view_archive.php?view=' . $currentPage);
+                } else {
+                    header("location: ./");
+                };
             };
         };
     };
