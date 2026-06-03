@@ -2,8 +2,7 @@
 
 function BrowseDropdown()
 {
-    $currentSearch = $_GET["search"] ?? "";
-    
+    $filterBy = $_GET["filterBy"] ?? "title";
 
     $browseObj = [
         "allStudies" => "All Studies",
@@ -23,7 +22,7 @@ function BrowseDropdown()
     foreach($browseObj as $key => $value) {
 ?>
     <div class="dropdown-options">
-        <a href="./?search=&category=<?php echo $key ?>"><?php echo $value ?></a>
+        <a href="./?search=&category=<?php echo $key ?>&filterBy=<?php echo $filterBy ?>"><?php echo $value ?></a>
     </div>
 <?php
     };

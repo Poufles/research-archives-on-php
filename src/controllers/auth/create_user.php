@@ -21,7 +21,6 @@ $fieldStatus = [
 ];
 
 if (isset($_POST["submit"])) {
-
     // Checks if username already exists
     $baseDir = __DIR__ . "/../../../database/user_data/";
     if (!empty($_POST["username"])) {
@@ -41,12 +40,12 @@ if (isset($_POST["submit"])) {
         "status" => empty($_POST["status"]),
     ];
 
-    $isComplete = true; // To check if can proceed to be registered
     foreach ($inputFields as $key => $value) {
 
         if ($key == "username" && $fieldStatus["username"] == "duplicate") {
-            $isComplete = false;
-            continue;
+            $_SESSION['authresponse'] = 'duplicate';
+            header('location: ./register.php');
+            exit;
         };
 
         // Verifies if input field is set
@@ -54,27 +53,37 @@ if (isset($_POST["submit"])) {
             $userCredentials[$key] = $_POST[$key];
             $fieldStatus[$key] = "set";
         } else {
-            $isComplete = false;
+            $_SESSION['authresponse'] = 'missing';
+            header('location: ./register.php');
+            exit;
         };
     };
 
-    if ($isComplete) {
-        $newUserDir = $baseDir . $userCredentials["username"];
+    $newUserDir = $baseDir . $userCredentials["username"];
 
-        mkdir($newUserDir);
+    mkdir($newUserDir);
 
-        // AI was used here
-        file_put_contents($newUserDir . "/profile.json", json_encode($userCredentials));
-        // AI was used here
+    // AI was used here
+    file_put_contents($newUserDir . "/profile.json", json_encode($userCredentials));
+    // AI was used here
 
-        file_put_contents(
-            "$newUserDir/uploads.json",
-            json_encode([], JSON_PRETTY_PRINT)
-        );
+    file_put_contents(
+        "$newUserDir/uploads.json",
+        json_encode([], JSON_PRETTY_PRINT)
+    );
 
-        $_SESSION["username"] = $userCredentials["username"];
+    $_SESSION["username"] = $userCredentials["username"];
 
-        setcookie("archive-insession", true, time() + 9999, "/");
+    setcookie("archive-insession", true, time() + 9999, "/");
+    setcookie("archive-username", $userCredentials['username'], time() + 9999, "/");
+
+    if (isset($_COOKIE['archive-inview'])) {
+        $currentPage = $_COOKIE['archive-inview'];
+
+        header('location: ./view_archive.php?view=' . $currentPage);
+    } else {
         header("location: ./");
     };
+
+    unset($_SESSION['authresponse']);
 };

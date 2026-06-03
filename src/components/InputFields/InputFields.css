@@ -133,5 +133,16 @@ form .form-actions {
     margin-top: 30px;
     display: flex;
     align-items: center;
+}
+
+form .form-actions .error-message {
+    flex: 1 1 auto;
+
+    color: red;
+}
+
+form .form-actions .actions {
+    display: flex;
+    align-items: center;
     justify-content: right;
 }
