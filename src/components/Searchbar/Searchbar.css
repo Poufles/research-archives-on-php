@@ -23,6 +23,19 @@
     gap: 1rem;
 }
 
+.component.searchbar #search-form .filters {
+    display: flex;
+    align-items: center;
+}
+
+.component.searchbar #search-form .filters .filter {
+    cursor: pointer;
+
+    &.hidden {
+        display: none;
+    }
+}
+
 .component.searchbar #search-form input {
     flex-grow: 1 1 auto;
 

@@ -45,8 +45,7 @@ if (isset($_POST["submit"])) {
         SaveToDirectory($newArchiveInfo);
         SaveToUser($newArchiveInfo);
 
-        $_SESSION["research"] = $newArchiveInfo['title'];
 
-        header("location: ./view_archive.php");
+        header("location: ./view_archive.php?view=" . $newArchiveInfo['title']);
     };
 };

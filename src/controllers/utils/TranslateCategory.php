@@ -1,12 +1,11 @@
 <?php
 
-function BrowseDropdown()
+/**
+ * @param string $category
+ */
+function TranslateCategory($category)
 {
-    $currentSearch = $_GET["search"] ?? "";
-    
-
-    $browseObj = [
-        "allStudies" => "All Studies",
+    $directories = [
         "businessAndMarketing" => "Business and Marketing",
         "computerStudies" => "Computer Studies",
         "economics" => "Economics",
@@ -20,11 +19,5 @@ function BrowseDropdown()
         "others" => "Others",
     ];
 
-    foreach($browseObj as $key => $value) {
-?>
-    <div class="dropdown-options">
-        <a href="./?search=&category=<?php echo $key ?>"><?php echo $value ?></a>
-    </div>
-<?php
-    };
-};
+    return $directories[$category];
+}
