@@ -4,8 +4,20 @@ function SearchQuery()
 {
     $requestedArchives = [];
     $search = $_GET['search'] ?? '';
-    $category = $_GET['category'] ?? '';
+    $category = $_GET['category'] ?? 'allStudies';
     $filter = $_GET['filterBy'] ?? 'title';
+
+    include __DIR__ . "/TranslateCategory.php";
+
+
+    if ($category != 'allStudies') $translatedCategory = TranslateCategory($category);
+
+    $response = [
+        "search" => $search,
+        "category" => $translatedCategory ?? 'All Studies',
+        "filter" => $filter,
+        "request" => [],
+    ];
 
     // Get archives.json
     $dir = __DIR__ . "/../../../database/directories/archives.json";
@@ -14,27 +26,28 @@ function SearchQuery()
 
     // filters
     if ($search == '' && $category == 'allStudies') {
-        foreach($archives as $archive) {
+        foreach ($archives as $archive) {
             array_push($requestedArchives, $archive);
         };
 
-        return $requestedArchives;
+        $response['request'] = $requestedArchives;
+
+        return $response;
     }
 
     if ($search != '' && $category == 'allStudies') {
-        foreach($archives as $archive) {
+        foreach ($archives as $archive) {
             if (str_contains(
                 strtolower($archive['title']),
                 strtolower($search)
             ))
-            array_push($requestedArchives, $archive);
+                array_push($requestedArchives, $archive);
         };
 
-        return $requestedArchives;
-    }
+        $response['request'] = $requestedArchives;
 
-    include __DIR__ . "/TranslateCategory.php";
-    $translatedCategory = TranslateCategory($category);
+        return $response;
+    }
 
     if ($search == '') {
         for ($iter = 0; $iter < count($archives); $iter++) {
@@ -43,7 +56,9 @@ function SearchQuery()
             }
         };
 
-        return $requestedArchives;
+        $response['request'] = $requestedArchives;
+
+        return $response;
     }
 
     for ($iter = 0; $iter < count($archives); $iter++) {
@@ -55,5 +70,7 @@ function SearchQuery()
         }
     };
 
-    return $requestedArchives;
+    $response['request'] = $requestedArchives;
+
+    return $response;
 };

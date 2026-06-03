@@ -1,6 +1,7 @@
 <?php
 
-$titleFromURL = $_SESSION["research"];
+$titleFromURL = $_GET['view'];
+$_SESSION["titleFromUrl"] = $titleFromURL;
 
 $database = __DIR__ . "/../../../database/directories/";
 $jsonFile = $database . "archives.json";
