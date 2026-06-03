@@ -25,6 +25,7 @@ function SearchQuery()
     $archives = json_decode($json, true);
 
     // filters
+    // url = ?search=&category=allStudies
     if ($search == '' && $category == 'allStudies') {
         foreach ($archives as $archive) {
             array_push($requestedArchives, $archive);
@@ -35,10 +36,11 @@ function SearchQuery()
         return $response;
     }
 
+    // url = ?search=searchItem&category=allStudies
     if ($search != '' && $category == 'allStudies') {
         foreach ($archives as $archive) {
             if (str_contains(
-                strtolower($archive['title']),
+                strtolower($archive[$filter]),
                 strtolower($search)
             ))
                 array_push($requestedArchives, $archive);
@@ -49,6 +51,7 @@ function SearchQuery()
         return $response;
     }
 
+    // url = ?search=&category=category
     if ($search == '') {
         for ($iter = 0; $iter < count($archives); $iter++) {
             if ($archives[$iter]['category'] == $translatedCategory) {
@@ -61,9 +64,10 @@ function SearchQuery()
         return $response;
     }
 
+    // url = ?search=searchItem&category=category
     for ($iter = 0; $iter < count($archives); $iter++) {
         if ($archives[$iter]['category'] == $translatedCategory && str_contains(
-            strtolower($archives[$iter]['title']),
+            strtolower($archives[$iter][$filter]),
             strtolower($search)
         )) {
             array_push($requestedArchives, $archives[$iter]);

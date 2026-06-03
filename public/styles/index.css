@@ -274,7 +274,7 @@ form .file-upload input {
     padding-bottom: 150px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 10px;
     overflow: auto;
 }
 
@@ -287,7 +287,7 @@ form .file-upload input {
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 45%;
+    top: 51%;
     left: 50%;
     transform: translate(-50%, -50%);
 }

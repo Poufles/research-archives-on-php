@@ -103,7 +103,7 @@ $response = SearchQuery();
                     </p>
                     <div id="tag">
                         <p>
-                            by <?php echo ucwords(strtolower($response['filter'])) ?>
+                            by <?php echo ucwords(strtolower($_GET['filterBy'])) ?>
                         </p>
                     </div>
                 </div>
