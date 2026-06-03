@@ -84,6 +84,14 @@ if (isset($_COOKIE["archive-insession"])) header("location: ./");
                     </div>
                 </div>
                 <div class="form-actions">
+                    <div class="error-message">
+                        <?php
+                        if (isset($_SESSION['authresponse'])) {
+                            if ($_SESSION['authresponse'] == 'duplicate') echo 'Username already exists...';
+                            if ($_SESSION['authresponse'] == 'missing') echo 'Please fill up all...';
+                        }
+                        ?>
+                    </div>
                     <?php
                     GenericFormButton(
                         "Reset",
