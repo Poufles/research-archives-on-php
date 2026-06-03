@@ -2,23 +2,7 @@
 
 session_start();
 
-// Variables : User Credentials
-$userCredentials = [
-    "username" => null,
-    "password" => null,
-    "email" => null,
-    "gender" => null,
-    "status" => null
-];
-
-// Variables : Fields Status
-$fieldStatus = [
-    "username" => "unset",
-    "password" => "unset",
-    "email" => "unset",
-    "gender" => "unset",
-    "status" => "unset"
-];
+$userCredentials = "";
 
 if (isset($_POST["submit"])) {
     // Checks if username already exists
@@ -27,8 +11,9 @@ if (isset($_POST["submit"])) {
 
         $verifyUsername = $_POST["username"];
         if (file_exists($baseDir . $verifyUsername)) {
-            $userCredentials["username"] = $verifyUsername;
-            $fieldStatus["username"] = "duplicate";
+            $_SESSION['authresponse'] = 'duplicate';
+            header('location: ./register.php');
+            exit;
         };
     };
 
@@ -42,40 +27,29 @@ if (isset($_POST["submit"])) {
 
     foreach ($inputFields as $key => $value) {
 
-        if ($key == "username" && $fieldStatus["username"] == "duplicate") {
-            $_SESSION['authresponse'] = 'duplicate';
-            header('location: ./register.php');
-            exit;
-        };
-
         // Verifies if input field is set
-        if (!$inputFields[$key]) {
-            $userCredentials[$key] = $_POST[$key];
-            $fieldStatus[$key] = "set";
-        } else {
+        if ($inputFields[$key]) {
             $_SESSION['authresponse'] = 'missing';
             header('location: ./register.php');
             exit;
-        };
+        }
+
+        $userCredentials = 
+            $userCredentials . $_POST[$key] . "\n";
     };
 
-    $newUserDir = $baseDir . $userCredentials["username"];
+    $newUserDir = $baseDir . $_POST["username"];
 
     mkdir($newUserDir);
 
-    // AI was used here
-    file_put_contents($newUserDir . "/profile.json", json_encode($userCredentials));
-    // AI was used here
+    file_put_contents($newUserDir . "/profile.txt", $userCredentials, FILE_APPEND);
 
-    file_put_contents(
-        "$newUserDir/uploads.json",
-        json_encode([], JSON_PRETTY_PRINT)
-    );
+    file_put_contents($newUserDir . "/uploads.txt", "", FILE_APPEND);
 
-    $_SESSION["username"] = $userCredentials["username"];
+    $_SESSION["username"] = $_POST["username"];
 
     setcookie("archive-insession", true, time() + 9999, "/");
-    setcookie("archive-username", $userCredentials['username'], time() + 9999, "/");
+    setcookie("archive-username", $_POST['username'], time() + 9999, "/");
 
     if (isset($_COOKIE['archive-inview'])) {
         $currentPage = $_COOKIE['archive-inview'];

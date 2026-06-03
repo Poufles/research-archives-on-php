@@ -39,7 +39,7 @@ if (!isset($_COOKIE["archive-insession"])) header("location: ./login.php");
         </div>
         <div id="nav-searchbar">
             <?php
-                Searchbar(true);
+            Searchbar(true);
             ?>
         </div>
         <div id="nav-actions">
@@ -65,7 +65,7 @@ if (!isset($_COOKIE["archive-insession"])) header("location: ./login.php");
             <?php
             } else {
             ?>
-            
+
                 <div class="component user-setting">
                     <div class="account-icon-container">
                         <span id="account-name"><?php echo $_SESSION["username"]; ?></span>
@@ -143,22 +143,31 @@ if (!isset($_COOKIE["archive-insession"])) header("location: ./login.php");
                     <input type="file" name="file" accept="application/pdf" id="">
                 </label>
                 <div class="form-actions">
-                    <?php
-                    GenericFormButton(
-                        "Reset",
-                        "reset",
-                        false,
-                        [
-                            "type" => "reset"
-                        ]
-                    );
+                    <div class="error-message">
+                        <?php
+                        if (isset($_SESSION['authresponse'])) {
+                            if ($_SESSION['authresponse'] == 'missing') echo 'Please fill up all...';
+                        }
+                        ?>
+                    </div>
+                    <div class="actions">
+                        <?php
+                        GenericFormButton(
+                            "Reset",
+                            "reset",
+                            false,
+                            [
+                                "type" => "reset"
+                            ]
+                        );
 
-                    GenericFormButton(
-                        "Arc Hive!",
-                        "submit",
-                        true,
-                    )
-                    ?>
+                        GenericFormButton(
+                            "Arc Hive!",
+                            "submit",
+                            true,
+                        )
+                        ?>
+                    </div>
                 </div>
             </form>
         </div>

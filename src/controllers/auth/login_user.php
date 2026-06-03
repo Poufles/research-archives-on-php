@@ -3,33 +3,30 @@ session_start();
 
 if (isset($_POST["login"])) {
 
-    $isFieldsComplete = true;
-    if (empty($_POST["username"]) || empty($_POST["password"])) $isFieldsComplete = false;
+    $username = $_POST["username"] ?? '';
+    $password = $_POST["password"] ?? '';
 
-    if (!$isFieldsComplete) {
+    if ($username == '' || $password == '') {
+        $_SESSION['authresponse'] = 'missing';
+        
         header('location: ./login.php');
         exit;
     }
 
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+    $profilePath = __DIR__ . "/../../../database/user_data/" . $username . "/";
 
-    $profilePath = __DIR__ . "/../../../database/user_data/" . $username . "/profile.json";
-
-    $isAccountExist = true;
+    // Checks if user doesn't exist
     if (!file_exists($profilePath)) {
-        $isAccountExist = false;
-    };
-
-    if (!$isAccountExist) {
         $_SESSION['authresponse'] = 'notexist';
         header('location: ./login.php');
         exit;
-    }
+    };
 
-    $profileData = json_decode(file_get_contents($profilePath), true);
+    $file = file($profilePath . 'profile.txt', FILE_IGNORE_NEW_LINES);
+    $profilePassword = $file[1]; // Password
 
-    if ($password != $profileData["password"]) {
+    // Checks if password doesn't match
+    if ($password != $profilePassword) {
         $_SESSION['authresponse'] = 'wrong';
         header('location: ./login.php');
         exit;
@@ -40,11 +37,13 @@ if (isset($_POST["login"])) {
     setcookie("archive-insession", true, time() + 9999, "/");
     setcookie("archive-username", $username, time() + 9999, "/");
 
+    // Verifies if user is accessing a pdf without registering
     if (isset($_COOKIE['archive-inview'])) {
         $currentPage = $_COOKIE['archive-inview'];
 
         header('location: ./view_archive.php?view=' . $currentPage);
     } else {
+        // Login
         header("location: ./");
     };
 

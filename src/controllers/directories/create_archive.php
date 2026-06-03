@@ -21,12 +21,11 @@ if (isset($_POST["submit"])) {
         "file" => empty($_FILES["file"])
     ];
 
-    $isFieldsComplete = true;
     foreach ($inputFields as $key => $value) {
         if ($inputFields[$key]) {
-            $isFieldsComplete = false;
-
-            break;
+            $_SESSION['authresponse'] = 'missing';
+            header('location: ./upload_archive.php');
+            exit;
         };
 
         if ($key == "file") {
@@ -37,15 +36,12 @@ if (isset($_POST["submit"])) {
         $newArchiveInfo[$key] = $_POST[$key];
     };
 
-    if ($isFieldsComplete) {
-        $newArchiveInfo["username"] = $_SESSION["username"];
+    $newArchiveInfo["username"] = $_SESSION["username"];
 
-        include __DIR__ . "/upload_archive.php";
+    include __DIR__ . "/upload_archive.php";
 
-        SaveToDirectory($newArchiveInfo);
-        SaveToUser($newArchiveInfo);
+    SaveToDirectory($newArchiveInfo);
+    SaveToUser($newArchiveInfo);
 
-
-        header("location: ./view_archive.php?view=" . $newArchiveInfo['title']);
-    };
+    header("location: ./view_archive.php?view=" . $newArchiveInfo['title']);
 };
