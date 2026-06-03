@@ -52,6 +52,7 @@ if (isset($_COOKIE["archive-insession"])) header("location: ./");
                     <div class="error-message">
                         <?php
                         if (isset($_SESSION['authresponse'])) {
+                            if ($_SESSION['authresponse'] == 'missing') echo 'Please fill up all...';
                             if ($_SESSION['authresponse'] == 'notexist') echo 'You are not from the Hive...';
                             if ($_SESSION['authresponse'] == 'wrong') echo 'Your credentials are incorrect...';
                         }
