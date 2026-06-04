@@ -91,3 +91,12 @@ fileUploads.forEach(fileUpload => {
         text.textContent = input.files[0]?.name || "Choose file (PDF)";
     });
 });
+
+let inputDate = document.body.querySelector('.component.input-field input[type=date]');
+
+console.log(inputDate);
+if (inputDate) {
+    const today = new Date().toISOString().split('T')[0];
+
+    inputDate.max = today;
+};

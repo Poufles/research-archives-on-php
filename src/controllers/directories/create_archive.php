@@ -28,9 +28,10 @@ if (isset($_POST["submit"])) {
             exit;
         };
 
-        if ($key == "file") {
-            $newArchiveInfo[$key] = $_FILES["file"];
-            break;
+        if ($key == "file" && empty($inputFields['file'])) {
+            $_SESSION['authresponse'] = 'missing';
+            header('location: ./upload_archive.php');
+            exit;
         };
 
         $newArchiveInfo[$key] = $_POST[$key];
@@ -41,7 +42,7 @@ if (isset($_POST["submit"])) {
     include __DIR__ . "/upload_archive.php";
 
     SaveToDirectory($newArchiveInfo);
-    SaveToUser($newArchiveInfo);
+    // SaveToUser($newArchiveInfo);
 
     header("location: ./view_archive.php?view=" . $newArchiveInfo['title']);
 };
