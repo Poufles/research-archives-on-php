@@ -74,7 +74,7 @@ if (!isset($_COOKIE["archive-insession"])) header("location: ./login.php");
                         </svg>
                     </div>
                     <div class="user-actions disabled">
-                        <a href="./">Hive Settings</a>
+                        <a href="./hive_settings.php">Hive Settings</a>
                         <a href="./upload_archive.php">Create an Archive</a>
                         <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                             <input type="submit" value="Hive out" name="logout">

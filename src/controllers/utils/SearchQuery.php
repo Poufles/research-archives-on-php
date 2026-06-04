@@ -26,7 +26,7 @@ function SearchQuery()
     // filters
     // url = ?search=&category=allStudies
     if ($search == '' && $category == 'allStudies') {
-        for ($iter = 0; $iter < count($file); $iter += 7) {
+        for ($iter = 0; $iter < count($file); $iter += 8) {
             array_push($requestedArchives, [
                 "title" => $file[$iter],
                 "category" => $file[$iter + 1],
@@ -43,7 +43,7 @@ function SearchQuery()
     // DO TOMORROW TILL BELOW //
     // url = ?search=searchItem&category=allStudies
     if ($search != '' && $category == 'allStudies') {
-        for ($iter = 0; $iter < count($file); $iter += 7) {
+        for ($iter = 0; $iter < count($file); $iter += 8) {
             if (!str_contains(
                 strtolower($file[$iter]),
                 strtolower($search)
@@ -64,7 +64,7 @@ function SearchQuery()
 
     // url = ?search=&category=category
     if ($search == '') {
-        for ($iter = 0; $iter < count($file); $iter += 7) {
+        for ($iter = 0; $iter < count($file); $iter += 8) {
             if ($file[$iter + 1] != $translatedCategory) continue;
 
             array_push($requestedArchives, [
@@ -81,7 +81,7 @@ function SearchQuery()
     }
 
     // url = ?search=searchItem&category=category
-    for ($iter = 0; $iter < count($file); $iter += 7) {
+    for ($iter = 0; $iter < count($file); $iter += 8) {
         if ($file[$iter + 1] != $translatedCategory || !str_contains(
             strtolower($file[$iter]),
             strtolower($search)
