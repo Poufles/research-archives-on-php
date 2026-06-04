@@ -55,7 +55,7 @@ else setcookie('archive-inview', $researchInfo['title'], time() + 9999, '/');
             <?php
             if (!$hasUsername) {
             ?>
-                <a href="../src/pages/auth/register.php" id="register">Register</a>
+                <a href="./register.php" id="register">Register</a>
             <?php
             } else {
             ?>
