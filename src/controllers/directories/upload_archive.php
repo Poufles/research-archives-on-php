@@ -1,7 +1,5 @@
 <?php
 
-// include __DIR__ . "/../utils/CategoryToDirectory.php";
-
 /**
  * @param object $archive
  */
@@ -22,7 +20,7 @@ function SaveToDirectory($archive)
         $archive['year'] . "\n" .
         $archive['abstract'] . "\n" .
         $archive['username'] . "\n" .
-        $archive['file']['name'] . "\n";
+        $archive['file']['name'] . "\n\n";
 
     file_put_contents($path, $newArchive, FILE_APPEND);
 

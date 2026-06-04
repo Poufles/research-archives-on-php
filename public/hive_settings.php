@@ -164,7 +164,7 @@ if (is_file($uploadsPath)) {
                     <div class="info-list">
                         <p><span>Username</span><?php echo htmlspecialchars($profile["username"]); ?></p>
                         <p><span>Email</span><?php echo htmlspecialchars($profile["email"]); ?></p>
-                        <p><span>Gender</span><?php echo htmlspecialchars($profile["gender"]); ?></p>
+                        <p><span>Gender</span><?php echo htmlspecialchars(ucfirst($profile["gender"])); ?></p>
                         <p><span>Status</span><?php echo htmlspecialchars($profile["status"]); ?></p>
                     </div>
                 </section>

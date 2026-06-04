@@ -8,7 +8,7 @@ $filePath = $baseDir . "archives.txt";
 
 $file = file($filePath, FILE_IGNORE_NEW_LINES);
 
-for ($iter = 0; $iter < count($file); $iter+=7) {
+for ($iter = 0; $iter < count($file); $iter+=8) {
     if ($file[$iter] != $titleFromURL) continue;
 
     $researchInfo = [
