@@ -50,7 +50,29 @@ if (isset($_POST["update_profile"])) {
         ($_POST["status"] ?? "") . "\n";
 
     file_put_contents($profilePath, $updatedProfile);
-    $settingsResponse = "Profile updated.";
+    header("location: ./hive_settings.php?profile_updated=1#edit-user");
+    exit;
+}
+
+if (isset($_POST["change_password"]) && is_file($profilePath)) {
+    $profileData = file($profilePath, FILE_IGNORE_NEW_LINES);
+    $currentPassword = trim($_POST["current_password"] ?? "");
+    $newPassword = trim($_POST["new_password"] ?? "");
+    $confirmPassword = trim($_POST["confirm_password"] ?? "");
+    $savedPassword = trim($profileData[1] ?? "");
+
+    if (!hash_equals($savedPassword, $currentPassword)) {
+        $settingsResponse = "Current password is incorrect.";
+    } else if ($newPassword == "" || $confirmPassword == "") {
+        $settingsResponse = "Please fill up all password fields.";
+    } else if ($newPassword != $confirmPassword) {
+        $settingsResponse = "New password and confirmation do not match.";
+    } else {
+        $profileData[1] = $newPassword;
+        file_put_contents($profilePath, implode("\n", $profileData) . "\n");
+        header("location: ./hive_settings.php?password_updated=1#change-password");
+        exit;
+    }
 }
 
 if (isset($_POST["delete_account"])) {
@@ -77,6 +99,9 @@ if (is_file($profilePath)) {
 if (is_file($uploadsPath)) {
     $uploads = file($uploadsPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 }
+
+if (isset($_GET["password_updated"])) $settingsResponse = "Password updated.";
+if (isset($_GET["profile_updated"])) $settingsResponse = "Profile updated.";
 ?>
 
 <!DOCTYPE html>
@@ -171,7 +196,7 @@ if (is_file($uploadsPath)) {
                 <section class="settings-panel edit-user-panel" id="edit-user">
                     <div class="panel-heading">
                         <p class="panel-title">Edit User</p>
-                        <a class="settings-action small-action" href="#profile-info">Close</a>
+                        <a class="settings-action small-action" href="./hive_settings.php#profile-info">Close</a>
                     </div>
                     <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <label>
@@ -213,7 +238,28 @@ if (is_file($uploadsPath)) {
                 </section>
                 <section class="settings-panel">
                     <p class="panel-title">Account Security</p>
-                    <a class="settings-action" href="./login.php">Change Password</a>
+                    <a class="settings-action" href="#change-password">Change Password</a>
+                </section>
+                <section class="settings-panel edit-user-panel" id="change-password">
+                    <div class="panel-heading">
+                        <p class="panel-title">Change Password</p>
+                        <a class="settings-action small-action" href="./hive_settings.php#profile-info">Close</a>
+                    </div>
+                    <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                        <label>
+                            <span>Old Password</span>
+                            <input type="password" name="current_password">
+                        </label>
+                        <label>
+                            <span>New Password</span>
+                            <input type="password" name="new_password">
+                        </label>
+                        <label>
+                            <span>Confirm Password</span>
+                            <input type="password" name="confirm_password">
+                        </label>
+                        <input class="settings-action" type="submit" value="Save Password" name="change_password">
+                    </form>
                 </section>
             </div>
         </div>
