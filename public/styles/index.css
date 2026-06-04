@@ -579,7 +579,8 @@ form .file-upload input {
 }
 
 .settings-panel input[type="email"],
-.settings-panel input[type="text"] {
+.settings-panel input[type="text"],
+.settings-panel input[type="password"] {
     border: 2px solid var(--primary-color);
     border-radius: 8px;
     color: var(--primary-color);
