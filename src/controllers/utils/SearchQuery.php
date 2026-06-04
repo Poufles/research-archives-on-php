@@ -20,15 +20,19 @@ function SearchQuery()
     ];
 
     // Get archives.json
-    $dir = __DIR__ . "/../../../database/directories/archives.json";
-    $json = file_get_contents($dir);
-    $archives = json_decode($json, true);
+    $fileDir = __DIR__ . "/../../../database/directories/archives.txt";
+    $file = file($fileDir, FILE_IGNORE_NEW_LINES);
 
     // filters
     // url = ?search=&category=allStudies
     if ($search == '' && $category == 'allStudies') {
-        foreach ($archives as $archive) {
-            array_push($requestedArchives, $archive);
+        for ($iter = 0; $iter < count($file); $iter += 7) {
+            array_push($requestedArchives, [
+                "title" => $file[$iter],
+                "category" => $file[$iter + 1],
+                "author" => $file[$iter + 2],
+                "year" => $file[$iter + 3],
+            ]);
         };
 
         $response['request'] = $requestedArchives;
@@ -36,14 +40,21 @@ function SearchQuery()
         return $response;
     }
 
+    // DO TOMORROW TILL BELOW //
     // url = ?search=searchItem&category=allStudies
     if ($search != '' && $category == 'allStudies') {
-        foreach ($archives as $archive) {
-            if (str_contains(
-                strtolower($archive[$filter]),
+        for ($iter = 0; $iter < count($file); $iter += 7) {
+            if (!str_contains(
+                strtolower($file[$iter]),
                 strtolower($search)
-            ))
-                array_push($requestedArchives, $archive);
+            )) continue;
+
+            array_push($requestedArchives, [
+                "title" => $file[$iter],
+                "category" => $file[$iter + 1],
+                "author" => $file[$iter + 2],
+                "year" => $file[$iter + 3],
+            ]);
         };
 
         $response['request'] = $requestedArchives;
@@ -53,10 +64,15 @@ function SearchQuery()
 
     // url = ?search=&category=category
     if ($search == '') {
-        for ($iter = 0; $iter < count($archives); $iter++) {
-            if ($archives[$iter]['category'] == $translatedCategory) {
-                array_push($requestedArchives, $archives[$iter]);
-            }
+        for ($iter = 0; $iter < count($file); $iter += 7) {
+            if ($file[$iter + 1] != $translatedCategory) continue;
+
+            array_push($requestedArchives, [
+                "title" => $file[$iter],
+                "category" => $file[$iter + 1],
+                "author" => $file[$iter + 2],
+                "year" => $file[$iter + 3],
+            ]);
         };
 
         $response['request'] = $requestedArchives;
@@ -65,13 +81,18 @@ function SearchQuery()
     }
 
     // url = ?search=searchItem&category=category
-    for ($iter = 0; $iter < count($archives); $iter++) {
-        if ($archives[$iter]['category'] == $translatedCategory && str_contains(
-            strtolower($archives[$iter][$filter]),
+    for ($iter = 0; $iter < count($file); $iter += 7) {
+        if ($file[$iter + 1] != $translatedCategory || !str_contains(
+            strtolower($file[$iter]),
             strtolower($search)
-        )) {
-            array_push($requestedArchives, $archives[$iter]);
-        }
+        )) continue;
+
+        array_push($requestedArchives, [
+            "title" => $file[$iter],
+            "category" => $file[$iter + 1],
+            "author" => $file[$iter + 2],
+            "year" => $file[$iter + 3],
+        ]);
     };
 
     $response['request'] = $requestedArchives;

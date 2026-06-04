@@ -3,17 +3,23 @@
 $titleFromURL = $_GET['view'];
 $_SESSION["titleFromUrl"] = $titleFromURL;
 
-$database = __DIR__ . "/../../../database/directories/";
-$jsonFile = $database . "archives.json";
+$baseDir = __DIR__ . "/../../../database/directories/";
+$filePath = $baseDir . "archives.txt";
 
-$json = file_get_contents($jsonFile);
-$contents = json_decode($json, true);
+$file = file($filePath, FILE_IGNORE_NEW_LINES);
 
-for ($iter = 0; $iter < count($contents); $iter++) {
-    $titleFromJSON = $contents[$iter]['title'];
+for ($iter = 0; $iter < count($file); $iter+=7) {
+    if ($file[$iter] != $titleFromURL) continue;
 
-    if ($titleFromURL == $titleFromJSON) {
-        $researchInfo = $contents[$iter];
-        break;
-    };
+    $researchInfo = [
+        "title" => $file[$iter],
+        "category" => $file[$iter + 1],
+        "author" => $file[$iter + 2],
+        "year" => $file[$iter + 3],
+        "abstract" => $file[$iter + 4],
+        "username" => $file[$iter + 5],
+        "filename" => $file[$iter + 6],
+    ];
+
+    break;
 };

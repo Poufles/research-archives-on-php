@@ -7,7 +7,7 @@ $_SESSION['hasSearchItem'] = isset($_GET['search']);
 */
 function Searchbar($isNav = false)
 {
-    $filterBy = $_GET['filterBy'] ?? ''; 
+    $filterBy = $_GET['filterBy'] ?? 'title'; 
     $currentCategory = $_GET["category"] ?? "allStudies";
 ?>
     <div class="component searchbar <?php
