@@ -59,7 +59,7 @@ if (isset($_POST["delete_account"])) {
         session_destroy();
         setcookie("archive-insession", false, 1, "/");
         setcookie("archive-username", "", 1, "/");
-        header("location: ./register.php");
+        header("location: ./");
         exit;
     } else {
         $settingsResponse = "Type your username to delete this account.";

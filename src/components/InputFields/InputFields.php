@@ -5,14 +5,14 @@
  * @param string $placeholder
  * @param string $svg
  */
-function InputFieldText($name, $placeholder, $svg)
+function InputFieldText($name, $placeholder, $svg, $isEmail = false)
 {
 ?>
     <div class="component input-field">
         <div class="svg-hint disabled">
             <?php echo $svg ?>
         </div>
-        <input type="text" name="<?php echo $name ?>" id="" placeholder="<?php echo $placeholder ?>">
+        <input type="<?php echo $isEmail ? "email" : "text"  ?>" name="<?php echo $name ?>" id="" placeholder="<?php echo $placeholder ?>">
     </div>
 <?php
 };
