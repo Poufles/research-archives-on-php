@@ -1,6 +1,5 @@
 <?php
 include __DIR__ . "/../src/controllers/utils/CheckInSession.php";
-include __DIR__ . "/../src/controllers/utils/PathHandler.php";
 include __DIR__ . "/../src/controllers/auth/logout_user.php";
 include __DIR__ . "/../src/components/Searchbar/Searchbar.php";
 
@@ -205,8 +204,8 @@ if (is_file($uploadsPath)) {
                         <p class="empty-state">No uploaded archives yet.</p>
                     <?php } else { ?>
                         <div class="uploads-list">
-                            <?php foreach ($uploads as $upload) { ?>
-                                <p><?php echo htmlspecialchars($upload); ?></p>
+                            <?php for($iter = 0; $iter < count($uploads); $iter += 2) { ?>
+                                <p><?php echo htmlspecialchars($uploads[$iter]); ?></p>
                             <?php } ?>
                         </div>
                     <?php } ?>

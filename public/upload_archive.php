@@ -1,6 +1,5 @@
 <?php
 include __DIR__ . "/../src/controllers/utils/CheckInSession.php";
-include __DIR__ . "/../src/controllers/utils/PathHandler.php";
 include __DIR__ . "/../src/controllers/auth/logout_user.php";
 include __DIR__ . "/../src/controllers/directories/create_archive.php";
 

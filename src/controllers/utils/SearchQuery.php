@@ -44,8 +44,10 @@ function SearchQuery()
     // url = ?search=searchItem&category=allStudies
     if ($search != '' && $category == 'allStudies') {
         for ($iter = 0; $iter < count($file); $iter += 8) {
+            $filterNum = $filter == 'title' ? 0 : 2;
+
             if (!str_contains(
-                strtolower($file[$iter]),
+                strtolower($file[$iter + $filterNum]),
                 strtolower($search)
             )) continue;
 
@@ -82,8 +84,10 @@ function SearchQuery()
 
     // url = ?search=searchItem&category=category
     for ($iter = 0; $iter < count($file); $iter += 8) {
+        $filterNum = $filter == 'title' ? 0 : 2;
+
         if ($file[$iter + 1] != $translatedCategory || !str_contains(
-            strtolower($file[$iter]),
+            strtolower($file[$iter + $filterNum]),
             strtolower($search)
         )) continue;
 
