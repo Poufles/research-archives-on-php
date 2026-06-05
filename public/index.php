@@ -12,7 +12,7 @@ $archivesTxt = $directoriesPath . "/archives.txt";
 if (!is_dir($databasePath)) mkdir($databasePath);
 if (!is_dir($directoriesPath)) mkdir($directoriesPath);
 if (!is_dir($userDataPath)) mkdir($userDataPath);
-if (!is_file($userDataPath)) file_put_contents($archivesTxt, '');
+if (!is_file($archivesTxt)) file_put_contents($archivesTxt, '');
 
 if (isset($_COOKIE['archive-username'])) $_SESSION['username'] = $_COOKIE['archive-username'];
 $response = SearchQuery();
