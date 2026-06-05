@@ -45,15 +45,7 @@ git clone https://github.com/Poufles/research-archives-on-php.git
 
 2. Inside the project directory, create a folder named `database`.
 
-3. Inside the `database` folder, create the following directories:
-
-```text
-database/
-├── directories/
-└── user_data/
-```
-
-4. Run the project on a local PHP server (e.g., XAMPP, Laragon, WAMP).
+3. Run the project on a local PHP server (e.g., XAMPP, Laragon, WAMP).
 
 The installation is now complete.
 
