@@ -4,6 +4,16 @@ include __DIR__ . "/../src/controllers/auth/logout_user.php";
 include __DIR__ . "/../src/components/Searchbar/Searchbar.php";
 include __DIR__ . "/../src/controllers/utils/SearchQuery.php";
 
+$databasePath = __DIR__ . "/../database";
+$directoriesPath = $databasePath . "/directories";
+$userDataPath = $databasePath . "/user_data";
+$archivesTxt = $directoriesPath . "/archives.txt";
+
+if (!is_dir($databasePath)) mkdir($databasePath);
+if (!is_dir($directoriesPath)) mkdir($directoriesPath);
+if (!is_dir($userDataPath)) mkdir($userDataPath);
+if (!is_file($userDataPath)) file_put_contents($archivesTxt, '');
+
 if (isset($_COOKIE['archive-username'])) $_SESSION['username'] = $_COOKIE['archive-username'];
 $response = SearchQuery();
 ?>
