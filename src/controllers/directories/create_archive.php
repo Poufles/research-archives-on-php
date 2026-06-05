@@ -10,6 +10,8 @@ $newArchiveInfo = [
     "file" => null
 ];
 
+// $_SESSION['authresponse'] = '';
+
 if (isset($_POST["submit"])) {
 
     $inputFields = [
@@ -18,21 +20,21 @@ if (isset($_POST["submit"])) {
         "author" => empty($_POST["author"]),
         "year" => empty($_POST["year"]),
         "category" => empty($_POST["category"]),
-        "file" => empty($_FILES["file"])
+        "file" => empty($_FILES["file"]["name"])
     ];
 
     foreach ($inputFields as $key => $value) {
         if ($inputFields[$key]) {
             $_SESSION['authresponse'] = 'missing';
+            echo "First";
             header('location: ./upload_archive.php');
             exit;
         };
 
-        if ($key == "file" && empty($inputFields['file'])) {
-            $_SESSION['authresponse'] = 'missing';
-            header('location: ./upload_archive.php');
-            exit;
-        };
+        if ($key == "file") {
+            $newArchiveInfo[$key] = $_FILES["file"];
+            break;
+        }
 
         $newArchiveInfo[$key] = $_POST[$key];
     };
@@ -42,7 +44,7 @@ if (isset($_POST["submit"])) {
     include __DIR__ . "/upload_archive.php";
 
     SaveToDirectory($newArchiveInfo);
-    // SaveToUser($newArchiveInfo);
+    SaveToUser($newArchiveInfo);
 
     header("location: ./view_archive.php?view=" . $newArchiveInfo['title']);
 };
